@@ -3,11 +3,13 @@ package guru.springframework.sdjpaintro.bootstrap;
 import guru.springframework.sdjpaintro.domain.Book;
 import guru.springframework.sdjpaintro.repositories.BookRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Abdolrahim Tahvildari on 1/3/2023
  */
+@Profile({"local", "default"})
 @Component
 public class DataInitializer implements CommandLineRunner {
     private final BookRepository bookRepository;
@@ -18,6 +20,7 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        bookRepository.deleteAll();
         Book bookDDD = new Book("Domain Driven Design", "123", "RandomHouse");
 
         System.out.println("Id: " + bookDDD.getId() );
